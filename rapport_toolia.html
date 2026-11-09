@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Rapport de Projet de Fin d'Études - Toolia</title>
+<style>
+  @page {
+    size: A4;
+    margin: 20mm 20mm 25mm 20mm;
+    @bottom-right {
+      content: counter(page);
+    }
+  }
+  
+  body {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 11pt;
+    line-height: 1.5;
+    color: #111;
+    margin: 0;
+    padding: 0;
+    text-align: justify;
+  }
+
+  .page-break {
+    page-break-after: always;
+  }
+
+  /* Cover Page */
+  .cover-page {
+    text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px 0;
+    font-family: 'Times New Roman', Times, serif;
+  }
+  .inst-header {
+    font-size: 13pt;
+    line-height: 1.4;
+    margin-bottom: 30px;
+  }
+  .inst-title {
+    font-size: 16pt;
+    font-weight: bold;
+    margin-top: 15px;
+  }
+  .report-title-box {
+    margin: 40px 0;
+  }
+  .report-type {
+    font-size: 20pt;
+    font-weight: bold;
+    margin-bottom: 25px;
+    letter-spacing: 0.5px;
+  }
+  .project-title {
+    font-size: 17pt;
+    font-weight: bold;
+    line-height: 1.4;
+    margin-bottom: 12px;
+  }
+  .project-subtitle {
+    font-size: 13pt;
+    font-style: italic;
+    color: #333;
+  }
+  .meta-grid {
+    width: 100%;
+    margin-top: 50px;
+    font-size: 11pt;
+    text-align: left;
+    border-collapse: collapse;
+  }
+  .meta-grid td {
+    padding: 6px 4px;
+    vertical-align: top;
+  }
+  .meta-grid td.label {
+    font-weight: bold;
+    width: 32%;
+  }
+  .footer-year {
+    font-size: 12pt;
+    font-weight: bold;
+    margin-top: 40px;
+  }
+
+  /* Headings */
+  h1 {
+    font-size: 18pt;
+    font-weight: bold;
+    color: #000;
+    margin-top: 35px;
+    margin-bottom: 15px;
+    border-bottom: 1.5px solid #000;
+    padding-bottom: 5px;
+    page-break-after: avoid;
+  }
+  h2 {
+    font-size: 14pt;
+    font-weight: bold;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    color: #1a252f;
+    page-break-after: avoid;
+  }
+  h3 {
+    font-size: 12pt;
+    font-weight: bold;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    color: #2c3e50;
+    page-break-after: avoid;
+  }
+  h4 {
+    font-size: 11pt;
+    font-weight: bold;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    color: #34495e;
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-indent: 1.5em;
+  }
+
+  ul, ol {
+    margin-top: 0;
+    margin-bottom: 12px;
+    padding-left: 25px;
+  }
+  li {
+    margin-bottom: 4px;
+  }
+
+  /* Tables */
+  table.content-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    font-size: 10pt;
+  }
+  table.content-table th, table.content-table td {
+    border: 1px solid #777;
+    padding: 8px 10px;
+  }
+  table.content-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    text-align: left;
+  }
+
+  /* Figures */
+  .figure-box {
+    border: 1px solid #ccc;
+    background-color: #fafbfc;
+    border-radius: 4px;
+    padding: 12px 15px;
+    margin: 15px 0;
+    page-break-inside: avoid;
+  }
+  .figure-box-title {
+    font-weight: bold;
+    color: #0d3b66;
+    margin-bottom: 6px;
+    font-size: 11pt;
+  }
+  .figure-meta {
+    font-size: 10pt;
+    margin-bottom: 4px;
+  }
+  .figure-box p {
+    text-indent: 0;
+    font-size: 10pt;
+    margin-bottom: 6px;
+  }
+
+  /* Code block */
+  pre {
+    background-color: #f5f5f5;
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 9pt;
+    overflow-x: auto;
+    page-break-inside: avoid;
+    margin: 12px 0;
+  }
+
+  /* TOC */
+  .toc-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    font-size: 11pt;
+  }
+  .toc-h1 {
+    font-weight: bold;
+    margin-top: 8px;
+  }
+  .toc-h2 {
+    padding-left: 18px;
+  }
+  .toc-dots {
+    flex-grow: 1;
+    border-bottom: 1px dotted #888;
+    margin: 0 6px 4px 6px;
+  }
+
+  .header-running {
+    font-size: 9pt;
+    color: #666;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 4px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE DE GARDE -->
+<div class="cover-page page-break">
+  <div class="inst-header">
+    Ministère de l’Enseignement Supérieur et de la Recherche Scientifique<br>
+    Direction Générale des Études Technologiques<br>
+    <div class="inst-title">Institut Supérieur des Études Technologiques de Sfax</div>
+    Département Technologies de l’Informatique<br><br>
+    <strong>Licence Nationale en Technologies de l’Informatique</strong><br>
+    Parcours : Développement des Systèmes d’Information (DSI)
+  </div>
+
+  <div class="report-title-box">
+    <div class="report-type">Rapport de Projet de Fin d’Études</div>
+    <div class="project-title">Conception et réalisation de la plateforme e-commerce B2C « Toolia »</div>
+    <div class="project-subtitle">Plateforme dédiée à l’outillage professionnel avec Next.js et Prisma ORM</div>
+  </div>
+
+  <div>
+    <table class="meta-grid">
+      <tr>
+        <td class="label">Étudiante :</td>
+        <td>edam hammemi – Groupe DSI 32 – CIN : 1117339</td>
+      </tr>
+      <tr>
+        <td class="label">Organisme d’accueil :</td>
+        <td>EDI Solutions, Sfax</td>
+      </tr>
+      <tr>
+        <td class="label">Encadrant professionnel :</td>
+        <td>morched gwia (Responsable Technique)</td>
+      </tr>
+      <tr>
+        <td class="label">Période du stage :</td>
+        <td>Du 05 mai 2026 au 31 mai 2026</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="footer-year">
+    Année universitaire 2025–2026
+  </div>
+</div>
+
+<!-- REMERCIEMENTS -->
+<div class="page-break">
+  <div class="header-running">
+    <span>Projet de fin d’études – Toolia</span>
+    <span>edam hammemi</span>
+  </div>
+  
+  <h1>Remerciements</h1>
+  
+  <p>Je tiens à exprimer ma profonde gratitude à M. morched gwia, Responsable Technique chez EDI Solutions et encadrant professionnel de ce projet, pour sa disponibilité, ses orientations méthodologiques rigoureuses et la qualité exceptionnelle de son accompagnement tout au long de cette période de stage. Ses conseils techniques m’ont permis d'approfondir la conception architecturale, de confronter les choix d'implémentation aux besoins fonctionnels réels et d'aboutir avec succès à la réalisation de la plateforme Toolia.</p>
+
+  <p>Je remercie également chaleureusement l’ensemble de l’équipe d’EDI Solutions pour leur accueil, leur écoute et la richesse des échanges professionnels qui ont contribué à rendre cette expérience particulièrement formatrice. Je garde une reconnaissance particulière pour toutes les personnes qui ont partagé leur savoir-faire et m’ont encouragée à adopter une démarche rigoureuse face aux défis techniques rencontrés.</p>
+
+  <p>J’adresse enfin mes remerciements les plus sincères aux enseignants de l’Institut Supérieur des Études Technologiques de Sfax, et plus particulièrement à ceux du département Technologies de l’Informatique, pour la solidité de la formation théorique et pratique qui a constitué le socle de ce travail. Je remercie aussi affectueusement ma famille et mes proches pour leur soutien constant et leurs encouragements déterminants.</p>
+</div>
+
+<!-- TABLE DES MATIÈRES -->
+<div class="page-break">
+  <div class="header-running">
+    <span>Projet de fin d’études – Toolia</span>
+    <span>edam hammemi</span>
+  </div>
+
+  <h1>Table des matières</h1>
+
+  <div class="toc-row toc-h1"><span>Remerciements</span><span class="toc-dots"></span><span>i</span></div>
+  <div class="toc-row toc-h1"><span>Introduction générale</span><span class="toc-dots"></span><span>1</span></div>
+  
+  <div class="toc-row toc-h1"><span>1 Étude de l’organisme d’accueil</span><span class="toc-dots"></span><span>2</span></div>
+  <div class="toc-row toc-h2"><span>1.1 Présentation de l’organisme</span><span class="toc-dots"></span><span>2</span></div>
+  <div class="toc-row toc-h2"><span>1.2 Organigramme de l’entreprise</span><span class="toc-dots"></span><span>2</span></div>
+  <div class="toc-row toc-h2"><span>1.3 Description de la structure d’affectation</span><span class="toc-dots"></span><span>3</span></div>
+
+  <div class="toc-row toc-h1"><span>2 Présentation du thème du stage</span><span class="toc-dots"></span><span>4</span></div>
+  <div class="toc-row toc-h2"><span>2.1 Champ de l’étude et objet du stage</span><span class="toc-dots"></span><span>4</span></div>
+  <div class="toc-row toc-h2"><span>2.2 Planning prévisionnel du stage</span><span class="toc-dots"></span><span>4</span></div>
+
+  <div class="toc-row toc-h1"><span>3 Infrastructure informatique</span><span class="toc-dots"></span><span>6</span></div>
+  <div class="toc-row toc-h2"><span>3.1 Matériel informatique</span><span class="toc-dots"></span><span>6</span></div>
+  <div class="toc-row toc-h2"><span>3.2 Logiciels et outils utilisés</span><span class="toc-dots"></span><span>6</span></div>
+
+  <div class="toc-row toc-h1"><span>4 Étude préalable</span><span class="toc-dots"></span><span>8</span></div>
+  <div class="toc-row toc-h2"><span>4.1 Description de l’existant</span><span class="toc-dots"></span><span>8</span></div>
+  <div class="toc-row toc-h2"><span>4.2 Critiques de l’existant</span><span class="toc-dots"></span><span>8</span></div>
+  <div class="toc-row toc-h2"><span>4.3 Solutions proposées</span><span class="toc-dots"></span><span>9</span></div>
+  <div class="toc-row toc-h2"><span>4.4 Développement de la solution finale</span><span class="toc-dots"></span><span>9</span></div>
+
+  <div class="toc-row toc-h1"><span>5 Étude conceptuelle</span><span class="toc-dots"></span><span>10</span></div>
+  <div class="toc-row toc-h2"><span>5.1 Modélisation du système</span><span class="toc-dots"></span><span>10</span></div>
+  <div class="toc-row toc-h2"><span>&nbsp;&nbsp;&nbsp;&nbsp;5.1.1 Document de spécification des besoins (PRD)</span><span class="toc-dots"></span><span>10</span></div>
+  <div class="toc-row toc-h2"><span>&nbsp;&nbsp;&nbsp;&nbsp;5.1.2 Conception orientée objet et schéma relationnel Prisma</span><span class="toc-dots"></span><span>10</span></div>
+  <div class="toc-row toc-h2"><span>&nbsp;&nbsp;&nbsp;&nbsp;5.1.3 Architecture en couches</span><span class="toc-dots"></span><span>11</span></div>
+  <div class="toc-row toc-h2"><span>&nbsp;&nbsp;&nbsp;&nbsp;5.1.4 Validation conceptuelle</span><span class="toc-dots"></span><span>11</span></div>
+  <div class="toc-row toc-h2"><span>5.2 Justification des choix de conception</span><span class="toc-dots"></span><span>12</span></div>
+  <div class="toc-row toc-h2"><span>&nbsp;&nbsp;&nbsp;&nbsp;5.2.1 Gestion des rôles et sécurisation des routes</span><span class="toc-dots"></span><span>12</span></div>
+  <div class="toc-row toc-h2"><span>&nbsp;&nbsp;&nbsp;&nbsp;5.2.2 Gestion du stock et cohérence des commandes</span><span class="toc-dots"></span><span>12</span></div>
+  <div class="toc-row toc-h2"><span>&nbsp;&nbsp;&nbsp;&nbsp;5.2.3 Processus de facturation et commandes en TND</span><span class="toc-dots"></span><span>13</span></div>
+
+  <div class="toc-row toc-h1"><span>6 Réalisation</span><span class="toc-dots"></span><span>14</span></div>
+  <div class="toc-row toc-h2"><span>6.1 Environnement de réalisation</span><span class="toc-dots"></span><span>14</span></div>
+  <div class="toc-row toc-h2"><span>6.2 Authentification et gestion des comptes</span><span class="toc-dots"></span><span>14</span></div>
+  <div class="toc-row toc-h2"><span>6.3 Catalogue et recherche de produits</span><span class="toc-dots"></span><span>15</span></div>
+  <div class="toc-row toc-h2"><span>6.4 Fiche produit, avis et favoris</span><span class="toc-dots"></span><span>15</span></div>
+  <div class="toc-row toc-h2"><span>6.5 Panier et tunnel de commande</span><span class="toc-dots"></span><span>15</span></div>
+  <div class="toc-row toc-h2"><span>6.6 Administration et tableau de bord</span><span class="toc-dots"></span><span>16</span></div>
+  <div class="toc-row toc-h2"><span>6.7 Vérifications et qualité</span><span class="toc-dots"></span><span>16</span></div>
+
+  <div class="toc-row toc-h1"><span>7 Liste commentée des figures et captures d’écran (Figures 1 à 27)</span><span class="toc-dots"></span><span>17</span></div>
+  <div class="toc-row toc-h1"><span>8 Conclusion générale et perspectives</span><span class="toc-dots"></span><span>21</span></div>
+  <div class="toc-row toc-h1"><span>Webographie et bibliographie</span><span class="toc-dots"></span><span>22</span></div>
+</div>
+
+<!-- INTRODUCTION GÉNÉRALE -->
+<div class="page-break">
+  <div class="header-running">
+    <span>Projet de fin d’études – Toolia</span>
+    <span>edam hammemi</span>
+  </div>
+
+  <h1>Introduction générale</h1>
+
+  <p>La transformation numérique modifie en profondeur les habitudes d’achat des particuliers et des professionnels. Dans les domaines hautement spécialisés du bâtiment, de la maintenance industrielle et du bricolage averti, l’accès rapide à une offre d’outillage fiable, à des fiches techniques précises et à une visibilité immédiate sur les stocks disponibles représente un enjeu commercial et opérationnel déterminant. En Tunisie, le développement des infrastructures numériques et l'usage accru du web ouvrent aux distributeurs spécialisés de quincaillerie et de matériel industriel l’opportunité d'étendre leur visibilité bien au-delà de leur comptoir physique, tout en automatisant les processus d'achat en amont.</p>
+
+  <p>Le projet <strong>Toolia</strong> s’inscrit pleinement dans cette dynamique. Il porte sur la conception et la mise en œuvre d’une plateforme e-commerce B2C dédiée à la vente d’outillage professionnel et d’équipements d’atelier en Tunisie. L’offre réunit des marques de renommée mondiale telles que <strong>Bosch</strong>, <strong>Makita</strong>, <strong>DeWalt</strong> et <strong>Stanley</strong>. L'ensemble des articles y est structuré par catégories métier, enrichi de spécifications techniques exhaustives et tarifé en <strong>Dinars Tunisiens (TND)</strong>. Le système centralise dans une interface unique le catalogue, les niveaux de stock en temps réel, un panier persistant, un tunnel de commande sécurisé et un tableau de bord analytique pour les gestionnaires.</p>
+
+  <p>La problématique centrale du projet peut s'énoncer ainsi : <em>Comment concevoir une application web robuste, ergonomique et hautement réactive, capable de centraliser l’offre technique d’outillage, de garantir la cohérence transactionnelle des stocks et de simplifier le parcours client, tout en dotant les administrateurs d'outils analytiques de pilotage fiables ?</em></p>
+
+  <p>Pour répondre à cette problématique, la solution adoptée repose sur une architecture full-stack moderne articulée autour de <strong>Next.js 16</strong> (avec <strong>React 19</strong> et <strong>TypeScript</strong>), s’appuyant sur l'ORM <strong>Prisma 7</strong> et une base relationnelle <strong>SQLite via LibSQL</strong>. L’interface utilisateur exploite les capacités de <strong>Tailwind CSS v4</strong> et de la bibliothèque accessible <strong>Shadcn UI</strong>, tandis que la sécurité des accès et des sessions est assurée par <strong>NextAuth.js (Auth.js v5)</strong> couplé à <strong>bcryptjs</strong>.</p>
+
+  <p>Le présent rapport est structuré en huit chapitres : le premier présente l’organisme d’accueil EDI Solutions ; le deuxième détaille le thème, les objectifs et le planning de travail ; le troisième décrit l’infrastructure matérielle et logicielle ; les quatrième et cinquième chapitres analysent l’existant, les spécifications fonctionnelles et la conception détaillée du système ; le sixième chapitre expose la réalisation technique et les modules développés ; le septième fournit la liste exhaustive et commentée des 27 figures et captures d'écran ; enfin, la conclusion générale dresse le bilan du projet et esquisse ses perspectives d’évolution.</p>
+</div>
+
+<!-- CHAPITRE 1 -->
+<div class="page-break">
+  <div class="header-running">
+    <span>Projet de fin d’études – Toolia</span>
+    <span>edam hammemi</span>
+  </div>
+
+  <h1>Chapitre 1 : Étude de l’organisme d’accueil</h1>
+
+  <h2>1.1 Présentation de l’organisme</h2>
+  <p><strong>EDI Solutions</strong>, organisme d’accueil du stage, est une société de services et d’ingénierie informatique implantée à Sfax et fondée en 2016. L’entreprise s’est forgée une solide réputation en accompagnant les PME et grandes organisations dans leur transition digitale. Son portefeuille d’activités couvre trois axes complémentaires :</p>
+  <ul>
+    <li><strong>L’intégration de Progiciels de Gestion Intégrée (ERP) :</strong> Analyse des processus d’entreprise, paramétrage de modules d’approvisionnement, de gestion des stocks et de comptabilité.</li>
+    <li><strong>Le développement de solutions Web et Mobiles sur-mesure :</strong> Création d’applications métiers, portails collaboratifs et plateformes transactionnelles e-commerce.</li>
+    <li><strong>La Business Intelligence (BI) et la valorisation des données :</strong> Conception d’entrepôts de données et restitution d'indicateurs de pilotage via des tableaux de bord interactifs.</li>
+  </ul>
+  <p>Cette triple compétence confère à EDI Solutions une vision globale des systèmes d’information, alliant l'efficacité ergonomique des interfaces grand public à la rigueur de gestion des flux transactionnels d’entreprise.</p>
+
+  <h2>1.2 Organigramme de l’entreprise</h2>
+  <p>L’organisation d’EDI Solutions repose sur une hiérarchie collaborative structurée pour favoriser l’agilité et la qualité des livrables :</p>
+  
+  <table class="content-table">
+    <thead>
+      <tr>
+        <th>Niveau hiérarchique</th>
+        <th>Responsabilités principales</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Direction Générale</strong></td>
+        <td>Définition de la stratégie globale, partenariats commerciaux et pilotage économique.</td>
+      </tr>
+      <tr>
+        <td><strong>Direction Technique & Projets</strong></td>
+        <td>Gouvernance des choix architecturaux, encadrement méthodologique et supervision technique.</td>
+      </tr>
+      <tr>
+        <td><strong>Pôle Web & Mobile</strong></td>
+        <td>Conception UX/UI, développement front-end et back-end, intégration d'APIs et tests logiciels.</td>
+      </tr>
+      <tr>
+        <td><strong>Pôle ERP & Solutions Métier</strong></td>
+        <td>Modélisation fonctionnelle, paramétrage des règles de gestion et support d'exploitation.</td>
+      </tr>
+      <tr>
+        <td><strong>Pôle BI & Analyse de Données</strong></td>
+        <td>Modélisation des données, reporting financier et valorisation décisionnelle.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>1.3 Description de la structure d’affectation</h2>
+  <p>Le stage s’est déroulé au sein du <strong>Pôle Web & Mobile</strong>. Cette structure réunit des ingénieurs et développeurs chargés de concevoir des architectures applicatives pérennes pour des clients externes ou des projets internes. Dans ce cadre, la réalisation de <em>Toolia</em> a constitué un terrain d’application idéal permettant de mobiliser des compétences avancées : modélisation relationnelle de données, développement full-stack avec les Server Actions de Next.js, sécurisation des flux et mise en place d’interfaces responsives modernes.</p>
+  <p>La conduite du projet s'est inspirée des pratiques agiles <strong>Scrum</strong> adaptées à la durée du stage : décomposition en tâches bien délimitées, sprints hebdomadaires, validation continue des jalons et revues de code sous la supervision de M. morched gwia.</p>
+</div>
+
+<!-- CHAPITRE 2 -->
+<div class="page-break">
+  <div class="header-running">
+    <span>Projet de fin d’études – Toolia</span>
+    <span>edam hammemi</span>
+  </div>
+
+  <h1>Chapitre 2 : Présentation du thème du stage</h1>
+
+  <h2>2.1 Champ de l’étude et objet du stage</h2>
+  <p>Le projet consiste à concevoir et développer une plateforme e-commerce B2C complète et sur-mesure pour la commercialisation d’outillage professionnel et de matériel d’équipement en Tunisie. Le nom retenu, <strong>Toolia</strong>, symbolise la spécialisation et la rigueur technique dans l'outillage. La plateforme doit concilier deux exigences majeures :</p>
+  <ul>
+    <li><strong>Une expérience client fluide et intuitive (Frontend) :</strong> Recherche rapide d'outils, filtrage par marques réputées (Bosch, Makita, DeWalt), fiches produits détaillées, gestion de panier persistant, devis/checkout sécurisé et historique de commandes.</li>
+    <li><strong>Une administration rigoureuse et performante (Backend & Back-Office) :</strong> Gestion centralisée du catalogue (CRUD produits, marques, catégories), contrôle instantané du stock avec alertes de réapprovisionnement, suivi du cycle de vie des commandes et tableau de bord décisionnel synthétisant les ventes en Dinars Tunisiens (TND).</li>
+  </ul>
+
+  <h2>2.2 Planning prévisionnel du stage</h2>
+  <p>Le stage s’est déroulé sur une période effective de quatre semaines. Le tableau ci-dessous récapitule la répartition chronologique des phases de travail et les livrables associés :</p>
+
+  <table class="content-table">
+    <thead>
+      <tr>
+        <th>Période</th>
+        <th>Phase de travail</th>
+        <th>Activités réalisées & Livrables</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>05 – 09 mai</strong></td>
+        <td>Analyse et cadrage</td>
+        <td>Recueil des besoins métiers, rédaction du document PRD, identification des acteurs (Customer / Admin), configuration de l'environnement de développement Next.js 16 et initialisation du dépôt Git.</td>
+      </tr>
+      <tr>
+        <td><strong>12 – 16 mai</strong></td>
+        <td>Modélisation des données</td>
+        <td>Conception du schéma relationnel Prisma (10 entités), configuration de SQLite via LibSQL, écriture et exécution du script de seeding (30 produits, 8 catégories, marques) et validation avec Prisma Studio.</td>
+      </tr>
+      <tr>
+        <td><strong>19 – 23 mai</strong></td>
+        <td>Développement applicatif</td>
+        <td>Mise en place de l'App Router, Server Components pour le rendu rapide, Server Actions pour les mutations du panier et du checkout, configuration de NextAuth v5 avec bcryptjs pour l'authentification sécurisée.</td>
+      </tr>
+      <tr>
+        <td><strong>26 – 31 mai</strong></td>
+        <td>Interface, tests & bilan</td>
+        <td>Intégration UI avec Tailwind CSS v4 et Shadcn UI, dashboard avec Recharts, vérification des règles transactionnelles de stock, rédaction et finalisation du rapport technique.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- CHAPITRE 3 -->
+<div class="page-break">
+  <div class="header-running">
+    <span>Projet de fin d’études – Toolia</span>
+    <span>edam hammemi</span>
+  </div>
+
+  <h1>Chapitre 3 : Infrastructure informatique</h1>
+
+  <h2>3.1 Matériel informatique</h2>
+  <p>Le projet a été développé dans un environnement de travail personnel optimisé pour le développement web moderne. Les spécifications matérielles du poste de travail sont les suivantes :</p>
+  <ul>
+    <li><strong>Processeur :</strong> Intel Core i7 multi-cœurs (2.8 GHz, boost 4.7 GHz), garantissant une compilation rapide des modules TypeScript et de l'environnement Next.js.</li>
+    <li><strong>Mémoire vive (RAM) :</strong> 16 Go DDR4, permettant l'exécution simultanée du serveur de développement Next.js, de Prisma Studio, des outils d'inspection et des navigateurs de test.</li>
+    <li><strong>Stockage :</strong> Disque SSD NVMe de 512 Go assurant des opérations d'entrée/sortie ultra-rapides pour la gestion des dépendances et de la base SQLite locale.</li>
+    <li><strong>Système d'exploitation :</strong> Windows 11 Professionnel 64 bits avec terminal PowerShell et WSL2.</li>
+  </ul>
+
+  <h2>3.2 Logiciels et outils utilisés</h2>
+  <p>L’écosystème logiciel a été sélectionné pour sa modernité, sa robustesse et sa productivité :</p>
+  <ul>
+    <li><strong>Visual Studio Code :</strong> Environnement de développement intégré principal, enrichi des extensions officielles pour Prisma, Tailwind CSS, TypeScript et ESLint.</li>
+    <li><strong>Node.js (v20 LTS) & npm :</strong> Moteur d'exécution JavaScript et gestionnaire de paquets assurant la compatibilité avec Next.js 16.</li>
+    <li><strong>Prisma ORM 7 :</strong> Moteur de mapping objet-relationnel fournissant un typage strict et une API sécurisée d'accès aux données.</li>
+    <li><strong>Prisma Studio :</strong> Interface graphique web interactive facilitant la visualisation et la manipulation directe des données de la base SQLite (<code>dev.db</code>).</li>
+    <li><strong>LibSQL / SQLite :</strong> Moteur de base de données relationnelle embarqué, rapide et fiable pour la phase de développement et de qualification.</li>
+    <li><strong>Git & GitHub :</strong> Système de contrôle de version distribué pour le suivi des commits et l'archivage du code source.</li>
+  </ul>
+</div>
+
+<!-- CHAPITRE 4 -->
+<div class="page-break">
+  <div class="header-running">
+    <span>Projet de fin d’études – Toolia</span>
+    <span>edam hammemi</span>
+  </div>
+
+  <h1>Chapitre 4 : Étude préalable</h1>
+
+  <h2>4.1 Description de l’existant</h2>
+  <p>Dans le secteur de la distribution d'outillage en Tunisie, les pratiques traditionnelles prédominent : les clients artisans ou entreprises doivent se rendre directement sur les points de vente physiques ou passer des commandes par téléphone. La consultation des références techniques dépend de catalogues papier fournisseurs volumineux ou de devis établis à la demande par les commerciaux. Les écritures de commandes et la vérification des stocks s'effectuent souvent par saisies manuelles ou sur des feuilles de calcul locales non partagées.</p>
+
+  <h2>4.2 Critiques de l’existant</h2>
+  <p>Cette organisation artisanale présente plusieurs faiblesses structurelles majeures :</p>
+  <ul>
+    <li><strong>Absence de visibilité en temps réel sur les stocks :</strong> Un client peut commander un outil qui s'avère indisponible au dépôt, provoquant des ruptures de service et des retards sur les chantiers.</li>
+    <li><strong>Lourdeur administrative et risques d'erreurs :</strong> La ressaisie manuelle des références, des quantités et des adresses est source constante d'erreurs de facturation et de livraison.</li>
+    <li><strong>Disponibilité restreinte :</strong> Les commandes ne peuvent être initiées qu'aux horaires d'ouverture des magasins, privant les professionnels de la possibilité d'anticiper leurs commandes en soirée ou le week-end.</li>
+    <li><strong>Manque d'indicateurs consolidés :</strong> Pour la direction commerciale, l'analyse des ventes par marque ou l'identification des références à faible rotation nécessite des consolidations manuelles chronophages.</li>
+  </ul>
+
+  <h2>4.3 Solutions proposées</h2>
+  <p>Pour pallier ces limites, nous avons conçu <strong>Toolia</strong> : une plateforme e-commerce full-stack disponible 24h/24 et 7j/7. La solution propose un catalogue structuré avec moteur de recherche multi-critères, un panier persistant synchronisé sur le compte client, une validation transactionnelle du stock au moment de la commande et un tableau de bord décisionnel pour l'administration.</p>
+
+  <h2>4.4 Développement de la solution finale</h2>
+  <p>Le choix technique s'est porté sur <strong>Next.js 16</strong> avec <strong>React 19</strong> et <strong>TypeScript</strong>. Cette architecture présente l'avantage décisif d'unifier le frontend et le backend dans un écosystème homogène. Grâce aux <em>Server Components</em>, les pages du catalogue sont générées et pré-rendues côté serveur, garantissant des temps de chargement records et un référencement naturel optimal. L'utilisation conjointe de <strong>Prisma 7</strong> garantit une sécurité absolue des types (Type-Safety) entre le schéma de la base de données et les composants d'affichage.</p>
+</div>
+
+<!-- CHAPITRE 5 -->
+<div class="page-break">
+  <div class="header-running">
+    <span>Projet de fin d’études – Toolia</span>
+    <span>edam hammemi</span>
+  </div>
+
+  <h1>Chapitre 5 : Étude conceptuelle</h1>
+
+  <h2>5.1 Modélisation du système</h2>
+
+  <h3>5.1.1 Document de spécification des besoins (PRD)</h3>
+  <p>Le système Toolia distingue deux acteurs principaux avec des niveaux d'habilitation strictement isolés :</p>
+  <ul>
+    <li><strong>Le Client (CUSTOMER) :</strong> Peut parcourir le catalogue, rechercher des outils par mots-clés, filtrer par marque (Bosch, Makita, etc.) et catégorie, consulter les caractéristiques techniques, ajouter des articles à son panier persistant ou à sa liste de favoris (Wishlist), renseigner ses adresses de livraison, valider sa commande en Dinars Tunisiens (TND) et consulter son historique d'achats.</li>
+    <li><strong>L'Administrateur (ADMIN) :</strong> Dispose des privilèges d'accès au dashboard analytique, gère le cycle de vie des produits (création, modification des prix, mise à jour des stocks), administre les catégories et marques, surveille les alertes de stock bas et met à jour le statut d'expédition des commandes.</li>
+  </ul>
+
+  <h3>5.1.2 Conception orientée objet et schéma relationnel Prisma</h3>
+  <p>Le modèle relationnel défini dans <code>prisma/schema.prisma</code> comprend 10 entités reliées par des règles d'intégrité strictes :</p>
+  <ul>
+    <li><code>User</code> : Identité de l'utilisateur (id, email, mot de passe haché, rôle CUSTOMER/ADMIN).</li>
+    <li><code>Address</code> : Adresses de livraison liées à un utilisateur (rue, ville, code postal, pays).</li>
+    <li><code>Category</code> & <code>Brand</code> : Taxonomie d'organisation du catalogue technique.</li>
+    <li><code>Product</code> : Fiche outil complète (nom, description, prix en TND, stock, image, catégorie, marque).</li>
+    <li><code>Cart</code> & <code>CartItem</code> : Panier persistant reliant un utilisateur aux produits et quantités sélectionnées.</li>
+    <li><code>Order</code> & <code>OrderItem</code> : Historique immuable des commandes passées avec prix unitaire figé à l'instant de l'achat.</li>
+    <li><code>Review</code> & <code>Wishlist</code> : Avis, notations par étoiles et liste de favoris.</li>
+  </ul>
+
+  <h3>5.1.3 Architecture en couches</h3>
+  <p>L’application applique le principe de séparation des responsabilités à travers trois couches interconnectées :</p>
+  <pre>
+[Couche Présentation (React 19)]
+  ├── Server Components : Affichage SSR rapide et optimisé SEO
+  └── Client Components : Composants interactifs (Panier dynamique, Formulaires Shadcn)
+            │
+            ▼ (Server Actions sécurisées)
+[Couche Métier & Sécurité]
+  ├── NextAuth.js v5 : Gestion des sessions et vérification des rôles (Middleware)
+  ├── bcryptjs : Hachage salé des mots de passe
+  └── Logique Métier : Calculs des montants en TND, validation des stocks et transitions
+            │
+            ▼ (Requêtes typées)
+[Couche d'Accès aux Données & Persistance]
+  ├── Prisma ORM 7 : Client Prisma & Adaptateur LibSQL
+  └── Base de données relationnelle SQLite (dev.db)
+  </pre>
+
+  <h3>5.1.4 Validation conceptuelle</h3>
+  <p>L'intégrité relationnelle empêche les données orphelines : la suppression d'un utilisateur supprime ses paniers et favoris par cascade, tandis que les commandes passées et leurs lignes associées demeurent archivées pour la conformité comptable.</p>
+
+  <h2>5.2 Justification des choix de conception</h2>
+  <h3>5.2.1 Gestion des rôles et sécurisation des routes</h3>
+  <p>L'authentification repose sur des tokens de session sécurisés stockés dans des cookies HttpOnly, immunisés contre les attaques de type XSS. L'accès aux routes d'administration (<code>/dashboard/*</code>) est intercepté à la fois par le middleware Next.js et vérifié directement dans chaque Server Action côté serveur.</p>
+
+  <h3>5.2.2 Gestion du stock et cohérence des commandes</h3>
+  <p>Pour prévenir le phénomène de survente (deux clients achetant simultanément le dernier exemplaire d'une machine), la création de la commande et la décrémentation des stocks s'exécutent au sein d'une transaction atomique via <code>prisma.$transaction</code>. Si le stock disponible devient insuffisant au moment de la validation, l'intégralité de la transaction est annulée avec un message d'erreur explicite.</p>
+
+  <h3>5.2.3 Processus de facturation et commandes en TND</h3>
+  <p>Tous les montants sont calculés avec une précision décimale rigoureuse en Dinars Tunisiens (TND). Les lignes de commande (<code>OrderItem</code>) enregistrent le prix unitaire effectif à la date de la transaction, protégeant ainsi l'historique comptable même en cas de réévaluation ultérieure du prix catalogue du produit.</p>
+</div>
+
+<!-- CHAPITRE 6 -->
+<div class="page-break">
+  <div class="header-running">
+    <span>Projet de fin d’études – Toolia</span>
+    <span>edam hammemi</span>
+  </div>
+
+  <h1>Chapitre 6 : Réalisation</h1>
+
+  <h2>6.1 Environnement de réalisation</h2>
+  <p>Le projet est structuré selon les conventions de l'App Router de Next.js 16 :</p>
+  <ul>
+    <li><code>src/app/page.tsx</code> : Page d'accueil publique avec bannières, marques et produits phares.</li>
+    <li><code>src/app/products</code> & <code>src/app/products/[id]</code> : Catalogue général et fiche détaillée d'un outil.</li>
+    <li><code>src/app/cart</code> & <code>src/app/checkout</code> : Gestion dynamique du panier et tunnel de commande.</li>
+    <li><code>src/app/account</code> & <code>src/app/account/orders</code> : Espace client, profil et suivi des commandes.</li>
+    <li><code>src/app/dashboard</code> : Espace d'administration centralisé (produits, commandes, clients, stocks).</li>
+  </ul>
+
+  <h2>6.2 Authentification et gestion des comptes</h2>
+  <p>Les interfaces d'inscription (<code>/register</code>) et de connexion (<code>/login</code>) intègrent des validations complètes de formulaires. Les mots de passe sont hachés avec 10 tours de salage via <code>bcryptjs</code> avant tout enregistrement en base de données.</p>
+
+  <h2>6.3 Catalogue et recherche multi-critères</h2>
+  <p>Le catalogue supporte la recherche textuelle en temps réel basée sur les paramètres d'URL (<code>searchParams</code>). Les utilisateurs peuvent combiner un filtre par marque (ex : DeWalt), un filtre par catégorie (ex : Outillage électroportatif) et un tri par prix (croissant ou décroissant).</p>
+
+  <h2>6.4 Fiche produit, avis et favoris</h2>
+  <p>Chaque outil bénéficie d'une fiche complète détaillant sa puissance, son autonomie, ses accessoires fournis, son statut de disponibilité et les avis clients avec système d'évaluation par étoiles.</p>
+
+  <h2>6.5 Panier et tunnel de commande</h2>
+  <p>Le panier calcule en temps réel le sous-total en TND, applique les frais de port éventuels et permet d'ajuster les quantités. Le checkout permet au client de choisir son adresse d'expédition parmi celles enregistrées avant de confirmer sa commande.</p>
+
+  <h2>6.6 Administration et tableau de bord</h2>
+  <p>L'espace administrateur intègre des cartes statistiques de synthèse et un graphique interactif propulsé par <strong>Recharts</strong> visualisant l'évolution du chiffre d'affaires et le volume de commandes traitées.</p>
+
+  <h2>6.7 Vérifications et qualité</h2>
+  <p>Des tests fonctionnels complets ont validé les scénarios critiques : inscription d'un nouvel utilisateur, parcours complet de commande avec décrémentation du stock, blocage d'accès aux non-administrateurs sur le dashboard et robustesse des migrations Prisma.</p>
+</div>
+
+<!-- CHAPITRE 7 : FIGURES 1 À 27 -->
+<div class="page-break">
+  <div class="header-running">
+    <span>Projet de fin d’études – Toolia</span>
+    <span>edam hammemi</span>
+  </div>
+
+  <h1>Chapitre 7 : Liste commentée des figures et captures d’écran</h1>
+
+  <div class="figure-box">
+    <div class="figure-box-title">Figure 1. Schéma relationnel Prisma / diagramme de classes</div>
+    <div class="figure-meta"><strong>Emplacement :</strong> Modélisation conceptuelle (prisma/schema.prisma) | <strong>Acteurs :</strong> Système global</div>
+    <p>Cette illustration présente la modélisation relationnelle complète du système Toolia comprenant les entités <em>User</em>, <em>Address</em>, <em>Category</em>, <em>Brand</em>, <em>Product</em>, <em>Cart</em>, <em>CartItem</em>, <em>Order</em>, <em>OrderItem</em> et <em>Review</em>. Elle détaille les cardinalités 1-N (notamment entre une marque et ses produits, ou entre un utilisateur et ses commandes passées) et les clés primaires CUID garantissant l'absence de collisions.</p>
+  </div>
+
+  <div class="figure-box">
+    <div class="figure-box-title">Figure 2. Page d’inscription côté application</div>
+    <div class="figure-meta"><strong>Emplacement :</strong> /register | <strong>Acteurs :</strong> Visiteur / Futur client</div>
+    <p>La vue expose le formulaire de création de compte développé avec les composants Shadcn UI. L'utilisateur renseigne son nom, son adresse email et son mot de passe. Des indicateurs visuels signalent la conformité du mot de passe et l'absence de doublon email avant la soumission côté serveur.</p>
+  </div>
+
+  <div class="figure-box">
+    <div class="figure-box-title">Figure 3. Page de connexion</div>
+    <div class="figure-meta"><strong>Emplacement :</strong> /login | <strong>Acteurs :</strong> Utilisateurs enregistrés (Customer / Admin)</div>
+    <p>Cette capture illustre l'interface d'authentification NextAuth.js. L'utilisateur saisit ses identifiants qui sont validés de manière asynchrone. En cas de succès, une session chiffrée est initiée et l'utilisateur est redirigé vers son espace personnalisé en fonction de son rôle.</p>
+  </div>
+
+  <div class="figure-box">
+    <div class="figure-box-title">Figure 4. Page d’accueil Toolia</div>
+    <div class="figure-meta"><strong>Emplacement :</strong> / (Racine publique) | <strong>Acteurs :</strong> Tous publics</div>
+    <p>Cette vue d'ensemble met en valeur l'identité visuelle professionnelle de Toolia. Elle intègre une bannière Hero percutante avec appel à l'action, la barre de navigation principale avec accès au panier, la vitrine des marques partenaires (Bosch, Makita, DeWalt) et les catégories vedettes d'outillage.</p>
+  </div>
+
+  <div class="figure-box">
+    <div class="figure-box-title">Figure 5. Dashboard administrateur</div>
+    <div class="figure-meta"><strong>Emplacement :</strong> /dashboard | <strong>Acteurs :</strong> Administrateur (ADMIN)</div>
+    <p>Le tableau de bord décisionnel synthétise les indicateurs de performance commerciale : total des ventes cumulées en Dinars Tunisiens (TND), nombre total de commandes traitées et nouveaux clients inscrits. Il intègre un graphique interactif Recharts affichant les tendances hebdomadaires de vente.</p>
+  </div>
+
+  <div class="figure-box">
+    <div class="figure-box-title">Figure 6. Formulaire d’ajout de produit</div>
+    <div class="figure-meta"><strong>Emplacement :</strong> /dashboard/products/new | <strong>Acteurs :</strong> Administrateur</div>
+    <p>L'interface offre les champs nécessaires à la saisie d'un nouvel équipement : désignation, description détaillée, prix hors taxes et toutes taxes comprises en TND, stock initial, sélection de la catégorie et de la marque via des menus déroulants liés aux tables relationnelles, ainsi que l'URL de l'image de présentation.</p>
+  </div>
+
+  <div class="figure-box">
+    <div class="figure-box-title">Figure 7. Liste et gestion des produits</div>
+    <div class="figure-meta"><strong>Emplacement :</strong> /dashboard/products | <strong>Acteurs :</strong> Administrateur</div>
+    <p>Cette vue tabulaire permet aux gestionnaires de consulter l'ensemble du catalogue avec recherche textuelle instantanée, affichage des prix en TND, état du stock actuel et boutons d'actions directes pour éditer une référence ou ajuster un tarif.</p>
+  </div>
+
+  <div class="figure-box">
+    <div class="figure-box-title">Figure 8. Fiche détaillée d’un produit dans l’administration</div>
+    <div class="figure-meta"><strong>Emplacement :</strong> /dashboard/products/[id] | <strong>Acteurs :</strong> Administrateur</div>
+    <p>Cette capture présente la vue détaillée d'une machine vue par le gestionnaire. Elle regroupe les spécifications techniques enregistrées, les statistiques d'achat associées à cette référence et l'historique des avis clients attribués.</p>
+  </div>
+
+  <div class="figure-box">
+    <div class="figure-box-title">Figure 9. Modification d’un produit</div>
+    <div class="figure-meta"><strong>Emplacement :</strong> /dashboard/products/[id]/edit | <strong>Acteurs :</strong> Administrateur</div>
+    <p>L'écran affiche le formulaire d'édition pré-chargé avec les données actuelles de l'outil. L'administrateur peut réajuster le prix en TND, modifier la quantité en stock suite à un réapprovisionnement ou actualiser la fiche technique avant enregistrement via une Server Action dédiée.</p>
+  </div>
+
+  <div class="figure-box">
+    <div class="figure-box-title">Figure 10. Assistant ou recherche intelligente des outils</div>
+    <div class="figure-meta"><strong>Emplacement :</strong> Barre de recherche globale | <strong>Acteurs :</strong> Tous utilisateurs</div>
+    <p>Cette illustration montre le mécanisme de recherche prédictive en action. Dès la saisie des premières lettres (ex : « perc »), le composant interroge le catalogue et affiche un menu déroulant dynamique présentant les machines correspondantes (perceuses à percussion, perforateurs) avec leurs prix en TND.</p>
+  </div>
+
+  <div class="figure-box">
+    <div class="figure-box-title">Figure 11. Filtrage multi-critères par marque – Première vue (Bosch)</div>
+    <div class="figure-meta"><strong>Emplacement :</strong> /products?brand=Bosch | <strong>Acteurs :</strong> Visiteur / Client</div>
+    <p>La vue met en évidence l'actualisation dynamique du catalogue lorsque l'utilisateur sélectionne la marque « Bosch » dans les filtres latéraux. Seuls les outils électroportatifs et accessoires de la gamme professionnelle Bosch sont affichés.</p>
+  </div>
+
+  <div class="figure-box">
+    <div class="figure-box-title">Figure 12. Filtrage multi-critères par marque – Seconde vue (DeWalt & Makita)</div>
+    <div class="figure-meta"><strong>Emplacement :</strong> /products?brand=DeWalt&sort=price-asc | <strong>Acteurs :</strong> Visiteur / Client</div>
+    <p>Cette capture illustre la puissance du filtrage combiné : l'utilisateur filtre les outils de la marque « DeWalt » tout en appliquant un tri par prix croissant en Dinars Tunisiens (TND), démontrant la gestion fluide des paramètres d'URL (<code>searchParams</code>).</p>
+  </div>
+
+  <div class="figure-box">
+    <div class="figure-box-title">Figure 13. Gestion des clients et des rôles</div>
+    <div class="figure-meta"><strong>Emplacement :</strong> /dashboard/customers | <strong>Acteurs :</strong> Administrateur</div>
+    <p>Cette interface liste les utilisateurs enregistrés sur Toolia, affichant leur nom, adresse email, date de création du compte, volume de commandes passées et rôle attribué (badge « CUSTOMER » ou « ADMIN »).</p>
+  </div>
+
+  <div class="figure-box">
+    <div class="figure-box-title">Figure 14. Gestion et alerte des stocks</div>
+    <div class="figure-meta"><strong>Emplacement :</strong> /dashboard/products?stock=low | <strong>Acteurs :</strong> Administrateur</div>
+    <p>La capture expose l'outil de surveillance des stocks critiques. Les articles dont la quantité disponible est inférieure au seuil de sécurité (moins de 5 unités) sont mis en surbrillance avec un badge d'alerte orange ou rouge pour planifier les réapprovisionnements fournisseurs.</p>
+  </div>
+
+  <div class="figure-box">
+    <div class="figure-box-title">Figure 15. Suivi des commandes clients</div>
+    <div class="figure-meta"><strong>Emplacement :</strong> /dashboard/orders | <strong>Acteurs :</strong> Administrateur</div>
+    <p>Cette vue d'ensemble regroupe toutes les commandes passées avec leur numéro d'identification, le nom du client, le montant total en TND et un sélecteur permettant à l'administrateur de mettre à jour le statut logistique (En attente, En préparation, Expédiée, Livrée).</p>
+  </div>
+
+  <div class="figure-box">
+    <div class="figure-box-title">Figure 16. Récapitulatif et validation de commande (Checkout)</div>
+    <div class="figure-meta"><strong>Emplacement :</strong> /checkout | <strong>Acteurs :</strong> Client authentifié</div>
+    <p>L'écran de finalisation d'achat récapitule les articles commandés, les quantités, les adresses de facturation et de livraison sélectionnées, le montant des taxes applicables et le montant net total à payer exprimé en Dinars Tunisiens (TND).</p>
+  </div>
+
+  <div class="figure-box">
+    <div class="figure-box-title">Figure 17. Inscription client dans la navigation publique</div>
+    <div class="figure-meta"><strong>Emplacement :</strong> En-tête / Modal d'inscription | <strong>Acteurs :</strong> Nouveau visiteur</div>
+    <p>La capture montre l'intégration fluide du lien d'inscription dans le menu de navigation principal de Toolia, guidant l'utilisateur vers la création de son compte pour débloquer la persistance de son panier d'achat.</p>
+  </div>
+
+  <div class="figure-box">
+    <div class="figure-box-title">Figure 18. Connexion client</div>
+    <div class="figure-meta"><strong>Emplacement :</strong> /login (Vue client) | <strong>Acteurs :</strong> Client</div>
+    <p>Cette illustration présente l'interface épurée de connexion côté client avec options de mémorisation des identifiants et redirection automatique vers le panier précédemment constitué.</p>
+  </div>
+
+  <div class="figure-box">
+    <div class="figure-box-title">Figure 19. Profil client</div>
+    <div class="figure-meta"><strong>Emplacement :</strong> /account | <strong>Acteurs :</strong> Client connecté</div>
+    <p>La vue expose l'espace personnel du client regroupant ses informations de contact, son carnet d'adresses de livraison en Tunisie et des raccourcis vers l'historique de ses commandes et sa liste de favoris.</p>
+  </div>
+
+  <div class="figure-box">
+    <div class="figure-box-title">Figure 20. Fiche détaillée produit côté client</div>
+    <div class="figure-meta"><strong>Emplacement :</strong> /products/[id] | <strong>Acteurs :</strong> Visiteur / Client</div>
+    <p>L'écran présente la fiche produit complète avec photographie haute résolution de l'outil, badge de disponibilité (« En stock » avec nombre d'unités restantes), sélecteur de quantité, caractéristiques d'alimentation et bouton « Ajouter au panier ».</p>
+  </div>
+
+  <div class="figure-box">
+    <div class="figure-box-title">Figure 21. Page du panier avec calcul dynamique</div>
+    <div class="figure-meta"><strong>Emplacement :</strong> /cart | <strong>Acteurs :</strong> Client connecté</div>
+    <p>La capture montre la page de gestion du panier d'achat. L'utilisateur peut incrémenter ou décrémenter la quantité d'un outil en un clic, le sous-total et le montant total en TND s'actualisant instantanément sans rechargement de la page.</p>
+  </div>
+
+  <div class="figure-box">
+    <div class="figure-box-title">Figure 22. Étape de validation de commande et choix d’adresse</div>
+    <div class="figure-meta"><strong>Emplacement :</strong> /checkout/shipping | <strong>Acteurs :</strong> Client</div>
+    <p>L'interface permet au client de choisir une adresse de livraison existante ou d'en renseigner une nouvelle (gouvernorat, ville, code postal) avec vérification de la complétude des coordonnées pour la livraison.</p>
+  </div>
+
+  <div class="figure-box">
+    <div class="figure-box-title">Figure 23. Confirmation de commande</div>
+    <div class="figure-meta"><strong>Emplacement :</strong> /checkout/success | <strong>Acteurs :</strong> Client</div>
+    <p>L'écran de confirmation s'affiche immédiatement après la validation de la commande en base de données. Il présente un message de remerciement, le récapitulatif des articles achetés et le numéro de référence unique de la commande.</p>
+  </div>
+
+  <div class="figure-box">
+    <div class="figure-box-title">Figure 24. Historique des commandes du client</div>
+    <div class="figure-meta"><strong>Emplacement :</strong> /account/orders | <strong>Acteurs :</strong> Client connecté</div>
+    <p>Cette vue permet à l'utilisateur de consulter l'ensemble de ses commandes passées, avec dates, montants en TND, statuts de traitement (En cours, Livré) et un bouton permettant de consulter le détail de chaque transaction.</p>
+  </div>
+
+  <div class="figure-box">
+    <div class="figure-box-title">Figure 25. Modification du compte client</div>
+    <div class="figure-meta"><strong>Emplacement :</strong> /account/edit | <strong>Acteurs :</strong> Client connecté</div>
+    <p>Le formulaire permet de mettre à jour son nom complet, son numéro de téléphone de contact et ses préférences de facturation, les modifications étant persistées via une Server Action sécurisée.</p>
+  </div>
+
+  <div class="figure-box">
+    <div class="figure-box-title">Figure 26. Modification du mot de passe client</div>
+    <div class="figure-meta"><strong>Emplacement :</strong> /account/security | <strong>Acteurs :</strong> Client connecté</div>
+    <p>L'interface de sécurité requiert la saisie de l'ancien mot de passe, validé par <code>bcryptjs.compare</code>, avant d'enregistrer le nouveau mot de passe haché, prévenant toute modification frauduleuse de session.</p>
+  </div>
+
+  <div class="figure-box">
+    <div class="figure-box-title">Figure 27. Modification du mot de passe administrateur</div>
+    <div class="figure-meta"><strong>Emplacement :</strong> /dashboard/security | <strong>Acteurs :</strong> Administrateur</div>
+    <p>Cette dernière vue présente le mécanisme équivalent renforcé au sein du tableau de bord d'administration, garantissant la protection absolue des comptes disposant des droits de gestion sur l'ensemble de la plateforme Toolia.</p>
+  </div>
+</div>
+
+<!-- CHAPITRE 8 & WEBOGRAPHIE -->
+<div class="page-break">
+  <div class="header-running">
+    <span>Projet de fin d’études – Toolia</span>
+    <span>edam hammemi</span>
+  </div>
+
+  <h1>Chapitre 8 : Conclusion générale et perspectives</h1>
+
+  <p>Le projet de fin d'études <strong>Toolia</strong> a permis de concevoir et de réaliser avec succès une plateforme de commerce électronique B2C moderne, performante et adaptée aux spécificités de la distribution d'outillage professionnel en Tunisie. En articulant un catalogue technique structuré, un panier persistant synchronisé, des mécanismes transactionnels garantissant l'intégrité des stocks et un espace de gestion analytique, l'application apporte une réponse concrète aux défis de digitalisation du secteur.</p>
+
+  <p>Sur le plan des compétences professionnelles et académiques, ce travail a permis de consolider des acquis essentiels :</p>
+  <ul>
+    <li><strong>Maîtrise de l'écosystème Next.js 16 et React 19 :</strong> Exploitation poussée du modèle <em>App Router</em>, optimisation des temps de réponse grâce aux <em>Server Components</em> et traitement sécurisé des formulaires via les <em>Server Actions</em>.</li>
+    <li><strong>Ingénierie de données avec Prisma ORM 7 :</strong> Modélisation relationnelle rigoureuse, exécution de transactions atomiques indivisibles et manipulation typée des données sous SQLite / LibSQL.</li>
+    <li><strong>Sécurité et contrôle d'accès :</strong> Implémentation d'une authentification robuste basée sur NextAuth.js v5 et hachage BCrypt, garantissant un cloisonnement strict entre clients et administrateurs.</li>
+    <li><strong>Ergonomie et design accessible :</strong> Utilisation avancée de Tailwind CSS v4 et de la bibliothèque Shadcn UI pour élaborer une interface réactive adaptée aux standards modernes du web.</li>
+  </ul>
+
+  <h2>Perspectives d'évolution</h2>
+  <p>Pour faire évoluer ce prototype opérationnel vers une exploitation commerciale à grande échelle, plusieurs extensions sont envisagées :</p>
+  <ol>
+    <li><strong>Intégration d'une passerelle de paiement en ligne tunisienne :</strong> Connecter Toolia à des solutions de paiement électronique agréées telles que <em>Konnect</em> ou <em>Flouci</em> afin de permettre le règlement sécurisé par carte bancaire nationale.</li>
+    <li><strong>Suivi logistique et notifications multicanales :</strong> Intégrer un module de géolocalisation pour le suivi des livraisons en temps réel couplé à des notifications automatiques par SMS ou WhatsApp.</li>
+    <li><strong>Transformation en Progressive Web App (PWA) :</strong> Permettre aux professionnels du bâtiment d'installer Toolia sur leurs smartphones et de consulter les fiches techniques même avec une connectivité réseau limitée sur les chantiers.</li>
+  </ol>
+
+  <h1 style="margin-top: 40px;">Webographie et bibliographie</h1>
+
+  <p>[1] Vercel, <em>Documentation officielle de Next.js (App Router, Server Components & Server Actions)</em>, 2026. Accessible sur : https://nextjs.org/docs</p>
+  <p>[2] Prisma Data Platform, <em>Documentation officielle de Prisma ORM (Schema, Client, Migrations & Adapters)</em>, 2026. Accessible sur : https://www.prisma.io/docs</p>
+  <p>[3] React Core Team, <em>Documentation officielle de React 19</em>, 2026. Accessible sur : https://react.dev</p>
+  <p>[4] Auth.js Team, <em>Documentation officielle de NextAuth.js v5</em>, 2026. Accessible sur : https://authjs.dev</p>
+  <p>[5] Tailwind Labs, <em>Documentation officielle de Tailwind CSS v4</em>, 2026. Accessible sur : https://tailwindcss.com/docs</p>
+  <p>[6] Shadcn, <em>Bibliothèque de composants UI réutilisables Shadcn UI</em>, 2026. Accessible sur : https://ui.shadcn.com</p>
+  <p>[7] Lucide Icons, <em>Bibliothèque d’icônes vectorielles Lucide React</em>, 2026. Accessible sur : https://lucide.dev</p>
+  <p>[8] Recharts Community, <em>Documentation officielle des composants de visualisation graphique Recharts</em>, 2026. Accessible sur : https://recharts.org</p>
+  <p>[9] Turso / LibSQL, <em>Documentation de LibSQL et des pilotes de bases de données relationnelles embarquées</em>, 2026. Accessible sur : https://docs.turso.tech/libsql</p>
+</div>
+
+</body>
+</html>
